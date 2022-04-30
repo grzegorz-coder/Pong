@@ -1,8 +1,9 @@
+//color determination
 const boardBorder = "black"
 const boardBackground = "white"
 const snake_col = "gold"
 const snake_border = "black"
-
+//variables
 let racket1X = 10;
 let racket1Y = 75;
 let racket2X = 10;
@@ -21,15 +22,15 @@ let downPressed = false;
 let upPressed = false;
 let downPressed2 = false;
 let upPressed2 = false;
-
+//definition of the work area
 const gameBoard = document.querySelector(".game-window");
 const gameBoard_ctx = gameBoard.getContext("2d");
-
+//variables - rackets
 let racket1Z = (gameBoard.height - racket1Y)/2;
 let racket2Z = (gameBoard.height - racket2Y)/2;
-
+//the main function of the game
 main(); 
-
+//events
 document.addEventListener("keydown", move_rackets, false)
 document.addEventListener("keyup", dont_move_rackets, false)
 document.addEventListener("keydown", move_rackets2, false)
@@ -50,14 +51,14 @@ function main(){
     }, 50)
     
 }
-
+//drawing the play area
 function clearPongBoard() {
     gameBoard_ctx.fillStyle = boardBackground;
     gameBoard_ctx.strokeStyle = boardBorder;
     gameBoard_ctx.fillRect(0, 0, gameBoard.width, gameBoard.height);
     gameBoard_ctx.strokeRect(0, 0, gameBoard.width, gameBoard.height);
 }
-
+//drawing rackets and ball
 function drawRacket1()
 {
    gameBoard_ctx.beginPath();
@@ -84,6 +85,7 @@ function drawball()
     gameBoard_ctx.arc(targetX, targetY, ballRadius, 0, Math.PI*2)
     gameBoard_ctx.fill()
     gameBoard_ctx.closePath()
+    
     targetX+=dxBall
     targetY+=dyBall
     if(targetY + dyBall > gameBoard.height - ballRadius || targetY+dyBall < ballRadius ) {
@@ -110,7 +112,7 @@ function drawball()
             
         }
     }
-   
+// game over 
 function end_game() 
     {
         if(score === 100 && score1 < 100) {
@@ -123,14 +125,14 @@ function end_game()
             alert("Game over, the winner is Player 2");
         }
     }
-
+//draw the location of the ball
 function gameBall(min, max)
     {
         return Math.round((Math.random() * (max-min) + min) / 10) * 10;
     }
     
 
-
+// defining the buttons for moving the rackets
 function move_rackets(e) 
     {
         if(e.key == "Up" || e.key == "ArrowUp") {
@@ -173,7 +175,7 @@ function dont_move_rackets2(e)
         }
     }
 
-
+// functions to move the racks
 function moveRacket1() {
         gameBoard_ctx.fillStyle = "hsl(0, 0%, 0%, 0.1)";
         gameBoard_ctx.fillRect(0, 0, gameBoard.width, gameBoard.height);
